@@ -1,0 +1,43 @@
+
+/* Universal selector/ reset */
+/* border box is for removing extra padding and margin added */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+/* this is 62.5% or 10px of browser's default font size of *usually* 16px */
+/* we do this to base the rest of our pixel sizes on rem, xrem of the root value */ 
+// be considerate of people who are visually impared and need to use a browser font size that is larger than 16px
+html {
+    font-size: 62.5%; //this defines what 1rem is, 10px so it's not hard to work with.
+
+    //this must be compiled first in desktop-first mindset
+    @include respond(tab-land) {//width < 900?
+        font-size: 56.25%; // 1 rem = 9px, 9/16 = 56.25
+    }
+    //smaller screens last
+    @include respond(tab-port) {//width < 600?
+        font-size: 50%; // 1 rem = 8px, 8/16 = 50%
+    }
+    // @include respond(phone) {//width < 600?
+    //     font-size: 45%; // 1 rem = 8px, 8/16 = 50%
+    // }
+    @include respond(big-desktop) {
+        font-size: 75%; //1rem = 12
+    }
+}
+body {
+    box-sizing: border-box;
+    padding: 3rem;
+    @include respond(tab-port) {
+        padding: 0;
+    }
+}
+
+::selection {
+    background-color: $color-primary-dark;
+    color: $color-white;
+}
